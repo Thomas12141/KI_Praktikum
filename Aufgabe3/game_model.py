@@ -55,22 +55,22 @@ class ConnectFour(Game):
     def _check_horizontal(self, symbol: str) -> bool:
         for row in self.board:
             for i in range(len(row) - 3):
-                if row[i].symbol == symbol and row[i + 1].symbol == symbol and row[i + 2].symbol == symbol and row[
-                    i + 3].symbol == symbol:
+                if row[i].symbol == symbol and row[i + 1].symbol == symbol and row[i + 2].symbol == symbol \
+                        and row[i + 3].symbol == symbol:
                     return True
         return False
 
     def _check_vertical(self, symbol: str) -> bool:
         for i in range(len(self.board) - 3):
             for j in range(len(self.board[0])):
-                if self.board[i][j].symbol == (symbol) and self.board[i + 1][j].symbol == symbol and self.board[i + 2][
-                    j].symbol == symbol and self.board[i + 3][j].symbol == symbol:
+                if self.board[i][j].symbol == (symbol) and self.board[i + 1][j].symbol == symbol and \
+                        self.board[i + 2][j].symbol == symbol and self.board[i + 3][j].symbol == symbol:
                     return True
         return False
 
     def _check_diagonal(self, symbol: str) -> bool:
-        for i in range(len(self.board) - 3):
-            for j in range(len(self.board[0]) - 3):
+        for i in range(3, len(self.board) - 3):
+            for j in range(3, len(self.board[0]) - 3):
                 if self.board[i][j].symbol == symbol and self.board[i + 1][j + 1].symbol == symbol and \
                         self.board[i + 2][j + 2].symbol == symbol and self.board[i + 3][j + 3].symbol == symbol:
                     return True
@@ -96,5 +96,3 @@ class ConnectFour(Game):
 
     def is_board_full(self) -> bool:
         pass
-
-
