@@ -10,8 +10,8 @@ def main():
     print("Possible input: digits 0,2,...,6")
     board.print_board()
     print("  0   1   2   3   4   5   6\n")
-    player_a = HumanPlayer("X", "A", board)
-    player_b = HumanPlayer("O", "B", board)
+    player_a = RandomPlayer("X", "A", board)
+    player_b = RandomPlayer("O", "B", board)
     turn_player_a = True
     while not game.check_win("X") and not game.check_win("O"):
         if turn_player_a:
@@ -24,6 +24,16 @@ def main():
                 print("This row is full. Please try again.")
             board.print_board()
             turn_player_a = True
+        if game.check_win("X"):
+            print("The winner is X.")
+            break
+        if game.check_win("O"):
+            print("The winner is O.")
+            break
+        if board.is_full():
+            print("The game is over, without a winner.")
+            break
+
 
     # board.print_board()
     # print(board)

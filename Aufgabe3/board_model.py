@@ -132,6 +132,12 @@ class ConnectFourBoard(Board):
             board_string += "|"
         print(board_string)
 
+    def is_full(self) -> bool:
+        for i in range(len(self.board)):
+            if not self.board[i].check_row_is_full():
+                return False
+        return True
+
 
 
 
