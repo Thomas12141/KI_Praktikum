@@ -6,20 +6,16 @@ def fibonacci_recursive(n):
     return fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2)
 
 
-def sum13(nums):
-  if len(nums)==0:
-    return 0
-  c = 0
-  i = 0
-  while i < len(nums):
-    if i == len(nums)-1 and nums[i] == 13:
-      break
-    if nums[i] == 13:
-      i+=2
-      continue
-    c += nums[i]
-    i+=1
-  return c
+def fibonacci_iterative(n):
+    if n == 0:
+        return 0
+    n_minus_one_element = 1
+    n_element = 1
+    for i in range(2, n):
+        temp = n_element
+        n_element = n_minus_one_element + n_element
+        n_minus_one_element = temp
+    return n_element
 
 
-print(sum13([1, 2, 13, 2, 1, 13]))
+print(fibonacci_recursive(13))
