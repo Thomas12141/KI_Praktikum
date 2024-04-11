@@ -16,12 +16,16 @@ def main():
     while not game.check_win("X") and not game.check_win("O"):
         if turn_player_a:
             while not game.set_move(player_a.get_move(), player_a.get_symbol()):
-                print("This row is full. Please try again.")
+                match player_a:
+                    case HumanPlayer():
+                        print("This row is full. Please try again.")
             board.print_board()
             turn_player_a = False
         else:
             while not game.set_move(player_b.get_move(), player_b.get_symbol()):
-                print("This row is full. Please try again.")
+                match player_b:
+                    case HumanPlayer():
+                        print("This row is full. Please try again.")
             board.print_board()
             turn_player_a = True
         if game.check_win("X"):
