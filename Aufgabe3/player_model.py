@@ -27,7 +27,7 @@ class RandomPlayer(Player):
         return self.symobl
 
     def get_move(self) -> int:
-        return random.randrange(0, 6, 1)
+        return random.randrange(0, 7, 1)
 
 
 class HumanPlayer(Player):
