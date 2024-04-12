@@ -14,7 +14,7 @@ def main():
     player_b = RandomPlayer("O", "B", board)
     whos_turn = player_a
     turn_player_a = True
-    while not game.check_win("X") and not game.check_win("O"):
+    while not game.check_win(player_a.get_symbol()) and not game.check_win(player_b.get_symbol()):
         if turn_player_a:
             whos_turn = player_a
             turn_player_a = False
@@ -32,51 +32,6 @@ def main():
         if board.is_full():
             print("The game is over, without a winner.")
             break
-
-    # board.print_board()
-    # print(board)
-    #### EXAMPLE: ####
-    # game = ConnectFour(board)
-    # print(game.check_win("X"))
-    # print(game.check_win("O"))
-    # print(game.check_win("O"))
-    # print(game.check_win("X"))
-    # game.set_move(0, "O")
-    # game.set_move(1, "X")
-    # board.print_board()
-    # game.set_move(0, "O")
-    # game.set_move(0, "X")
-    # game.set_move(0, "O")
-    # board.print_board()
-    # game.set_move(0, "X")
-    # game.set_move(1, "O")
-    # board.print_board()
-    # game.set_move(1, "X")
-    # game.set_move(6, "O")
-    # board.print_board()
-    # game.set_move(6, "X")
-    # game.set_move(0, "O")
-    # board.print_board()
-    # game.set_move(1, "X")
-    # game.set_move(2, "O")
-    # board.print_board()
-    # game.set_move(2, "X")
-    # game.set_move(6, "O")
-    # board.print_board()
-    # game.set_move(3, "X")
-    # game.set_move(3, "O")
-    # board.print_board()
-    # game.set_move(1, "X")
-    # game.set_move(4, "O")
-    # board.print_board()
-    # game.set_move(1, "X")
-    # game.set_move(5, "O")
-    # board.print_board()
-    # print(game.check_win("X"))
-    # print(game.check_win("O"))
-    # print(game.check_win("X"))
-    # print(game.check_win("O"))
-    #### EXAMPLE: ####
 
 
 if __name__ == '__main__':
