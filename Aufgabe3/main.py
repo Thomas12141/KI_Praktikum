@@ -7,14 +7,14 @@ from game_view import GameViewConnectFour
 def main():
     board = ConnectFourBoard()
     game = ConnectFour(board)
-    print("Possible input: digits 0,2,...,6")
+    print("Possible input: digits 0,1,...,6")
     board.print_board()
     print("  0   1   2   3   4   5   6\n")
-    player_a = RandomPlayer("X", "A", board)
+    player_a = HumanPlayer("X", "A", board)
     player_b = RandomPlayer("O", "B", board)
     whos_turn = player_a
     turn_player_a = True
-    while not game.check_win(player_a.get_symbol()) and not game.check_win(player_b.get_symbol()):
+    while True:
         if turn_player_a:
             whos_turn = player_a
             turn_player_a = False
