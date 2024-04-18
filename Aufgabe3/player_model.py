@@ -42,7 +42,7 @@ class HumanPlayer(Player):
     def get_move(self) -> int:
         move = input("Choose a field for player " + self.name + " (symbol " + self.symbol + ")")
         allowed_moves = [0, 1, 2, 3, 4, 5, 6]
-        while int(move) not in allowed_moves:
+        while not move.isdigit() or int(move) not in allowed_moves:
             input("This field is not allowed. Please try again.")
             move = input("Choose a field for player " + self.name + " (symbol " + self.symbol + ")")
         return int(move)

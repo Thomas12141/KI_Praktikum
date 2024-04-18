@@ -14,5 +14,12 @@ class GameViewTicTacToe(GameView):
     pass
 
 class GameViewConnectFour(GameView):
-    """Connect Four Game View erstellen"""
-    pass
+    def draw(self, board: dict):
+        board_string = ""
+        for i in range(len(board[0].row) - 1, -1, -1):
+            board_string += "\n"
+            for row in board:
+                board_string += str(row.row[i])
+            board_string += "|"
+        print(board_string)
+        return board_string

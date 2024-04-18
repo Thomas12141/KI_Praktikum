@@ -94,7 +94,6 @@ class ConnectFourBoard(Board):
     """implementieren eines ConnectFour Spielfeldes"""
 
     board: List[Row]
-
     def __init__(self) -> None:
         self.game_name = "ConnectFour"
         self._init_board()
@@ -122,15 +121,6 @@ class ConnectFourBoard(Board):
 
     def __getitem__(self, key):
         return self.board[key]
-
-    def print_board(self):
-        board_string = ""
-        for i in range(len(self.board[0].row) - 1, -1, -1):
-            board_string += "\n"
-            for row in self.board:
-                board_string += str(row.row[i])
-            board_string += "|"
-        print(board_string)
 
     def is_full(self) -> bool:
         for i in range(len(self.board)):
