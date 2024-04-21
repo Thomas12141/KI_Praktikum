@@ -20,9 +20,9 @@ class Row:
     row: List[Cell] = []
     index: int
 
-    def __init__(self, row: List[Cell]) -> None:
+    def __init__(self, row: List[Cell], index = 0) -> None:
         self.row = row
-        self.index = 0
+        self.index = index
 
     def set_cell(self, value: Cell) -> None:
         if self.check_row_is_full():
@@ -83,6 +83,14 @@ class Board(ABC):
     @abstractmethod
     def __getitem__(self, key):
         return self.dic[key]
+    
+    @abstractmethod
+    def __len__(self):
+        return len(self.dic)
+    
+    @abstractmethod
+    def copy(self) -> "Board":
+        pass
 
 
 class TicTacToeBoard(Board):
@@ -121,12 +129,19 @@ class ConnectFourBoard(Board):
 
     def __getitem__(self, key):
         return self.board[key]
-
+    
     def is_full(self) -> bool:
         for i in range(len(self.board)):
             if not self.board[i].check_row_is_full():
                 return False
         return True
+    
+    def copy(self):
+        copy = ConnectFourBoard()
+        for i in range(len(self.board)):
+            for j in range(len(self.board[i])):
+                copy[i] = Row([Cell(symbol=self.board[i][j].symbol) for j in range(len(self.board[i]))],self.board[i].index)
+        return copy
 
 
 

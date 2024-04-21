@@ -10,14 +10,10 @@ from game_view import GameView
 class GameController(ABC):
     game: Game
     view: GameView
-    player1: Player
-    player2: Player
 
-    def __init__(self, game: Game, view: GameView, player1: Player, player2: Player) -> None:
+    def __init__(self, game: Game, view: GameView) -> None:
         self.game = game
         self.view = view
-        self.player1 = player1
-        self.player2 = player2
         pass
 
     @abstractmethod

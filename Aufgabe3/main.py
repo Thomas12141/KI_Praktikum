@@ -1,7 +1,7 @@
 from game_controller import GameControllerConnectFour
 from board_model import ConnectFourBoard
 from game_model import ConnectFour
-from player_model import HumanPlayer, RandomPlayer
+from player_model import HumanPlayer, RandomPlayer, UniformCostPlayer
 from game_view import GameViewConnectFour
 
 
@@ -9,15 +9,17 @@ def main():
     board = ConnectFourBoard()
     game = ConnectFour(board)
     view = GameViewConnectFour()
-    player_a = HumanPlayer("X", "A", board)
-    player_b = RandomPlayer("O", "B", board)
+    player_a = HumanPlayer("X", "A", game)
+    player_b = RandomPlayer("O", "B", game)
+    player_c = UniformCostPlayer(game)
     
-    controller = GameControllerConnectFour(game, view, player_a, player_b)
+    
+    controller = GameControllerConnectFour(game, view)
     controller.start()
-    whos_turn = player_a
-    
+    whos_turn = player_c
     while True:
-        whos_turn = player_a if whos_turn == player_b else player_b
+        #whos_turn = player_a if whos_turn == player_b else player_b
+        
         controller._play_one_round(whos_turn)
         if game.check_win(whos_turn.get_symbol()):
             print("The winner is " + whos_turn.get_symbol() + ".")

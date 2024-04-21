@@ -31,6 +31,10 @@ class Game(ABC):
     @abstractmethod
     def is_board_full(self) -> bool:
         pass
+    
+    @abstractmethod
+    def copy(self):
+        pass
 
 
 class TicTacToe(Game):
@@ -96,3 +100,6 @@ class ConnectFour(Game):
 
     def is_board_full(self) -> bool:
         pass
+    
+    def copy(self):
+        return ConnectFour(self.board.copy())

@@ -2,7 +2,8 @@
 import random
 from abc import ABC, abstractmethod
 
-from board_model import Board
+from game_model import ConnectFour, Game
+from board_model import Board, Cell
 
 
 class Player(ABC):
@@ -18,9 +19,8 @@ class Player(ABC):
 
 
 class RandomPlayer(Player):
-    def __init__(self, symobl, name, board: Board):
+    def __init__(self, symobl, name, game: Game):
         self.symobl = symobl
-        self.board = board
         self.name = name
 
     def get_symbol(self):
@@ -31,9 +31,8 @@ class RandomPlayer(Player):
 
 
 class HumanPlayer(Player):
-    def __init__(self, symbol, name, board: Board):
+    def __init__(self, symbol, name, game: Game):
         self.symbol = symbol
-        self.board = board
         self.name = name
 
     def get_symbol(self):
@@ -46,3 +45,54 @@ class HumanPlayer(Player):
             input("This field is not allowed. Please try again.")
             move = input("Choose a field for player " + self.name + " (symbol " + self.symbol + ")")
         return int(move)
+    
+class UniformCostPlayer(Player):
+    
+    active_symbol = None
+    game = None
+        
+    def __init__(self, game: Game):
+        self.symbols = ["X", "O"]
+        self.active_symbol = self.symbols[0]
+        self.game = game
+        
+    def generate_possible_moves(self):
+        moves = []
+        len = self.game.board.__len__()
+        for i in range(len):
+            if self.game.board.check_row_is_full(i):
+                continue
+            moves.append(i)
+        return moves
+    
+    
+    
+    def evaluate(self, game: Game, symbol: str) -> int:
+        
+        if game.check_win(symbol):
+            return 100
+        
+        return 0
+    
+    def uniform_cost_search(self):
+        frontier = [(self.game, 0, [])]
+        while frontier:
+            possible_moves = self.generate_possible_moves()
+            current_game, cost, moves_made = frontier.pop(0)
+            if len(possible_moves) == 1:
+                return possible_moves[0]
+            if len(frontier) >= 6000:
+                return moves_made[-1]
+            for move in possible_moves:
+                new_game = self.game.copy()
+                new_game.set_move(move, self.active_symbol)
+                evaluate_score = self.evaluate(new_game, self.active_symbol)
+                frontier.append((new_game, cost + 1 + evaluate_score, moves_made + [move]))
+                frontier.sort(key=lambda x: x[1])
+        return None
+
+    def get_symbol(self):
+        return self.active_symbol
+    def get_move(self) -> int:
+        self.active_symbol = self.symbols[0] if self.active_symbol == self.symbols[1] else self.symbols[1]
+        return self.uniform_cost_search()
