@@ -1,9 +1,10 @@
 """Entwickeln Sie unterschiedliche Spieler für ihr TicTacToe Spiel"""
+import heapq
 import random
 from abc import ABC, abstractmethod
 
 from game_model import ConnectFour, Game
-from board_model import Board, Cell
+from tree_utils import Node
 
 
 class Player(ABC):
@@ -77,11 +78,11 @@ class UniformCostPlayer(Player):
     def uniform_cost_search(self):
         frontier = [(self.game, 0, [])]
         while frontier:
-            possible_moves = self.generate_possible_moves()
+            possible_moves = self.game.get_possible_moves()
             current_game, cost, moves_made = frontier.pop(0)
             if len(possible_moves) == 1:
                 return possible_moves[0]
-            if len(frontier) >= 6000:
+            if len(frontier) >= 3000:
                 return moves_made[-1]
             for move in possible_moves:
                 new_game = self.game.copy()
@@ -96,3 +97,46 @@ class UniformCostPlayer(Player):
     def get_move(self) -> int:
         self.active_symbol = self.symbols[0] if self.active_symbol == self.symbols[1] else self.symbols[1]
         return self.uniform_cost_search()
+
+class UniformCostSimplePlayer(Player):
+    
+    active_symbol = None
+    game = None
+        
+    def __init__(self, game: Game):
+        self.symbols = ["X", "O"]
+        self.active_symbol = self.symbols[0]
+        self.game = game
+        
+    def uniform_cost_search(self, problem: Game):
+        initial_node = Node(problem)
+        frontier = []
+        heapq.heappush(frontier, (initial_node.path_cost, initial_node))
+        explored = set()
+
+        while frontier:
+            _, node = heapq.heappop(frontier)
+            
+            if node.is_goal_state():  
+                return node  
+            
+            explored.add(tuple(node.state_tuple()))  
+            
+            for action in node.actions():
+                child = node.child_node(action)
+                if child.state_tuple() not in explored and all(child.state_tuple() != other[1].state_tuple() for other in frontier):
+                    heapq.heappush(frontier, (child.path_cost, child))
+                elif any(child.state_tuple() == other[1].state_tuple() and child.path_cost < other[1].path_cost for other in frontier):
+                    index = next(i for i, v in enumerate(frontier) if v[1].state_tuple() == child.state_tuple())
+                    frontier[index] = (child.path_cost, child)
+                    heapq.heapify(frontier)
+
+        return None  # Keine Lösung gefunden
+
+    def get_symbol(self):
+        return self.active_symbol
+    def get_move(self) -> int:
+        self.active_symbol = self.symbols[0] if self.active_symbol == self.symbols[1] else self.symbols[1]
+        Node = self.uniform_cost_search(self.game)
+        #implementierung der Lösung
+        return 0

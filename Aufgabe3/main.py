@@ -1,7 +1,7 @@
 from game_controller import GameControllerConnectFour
 from board_model import ConnectFourBoard
 from game_model import ConnectFour
-from player_model import HumanPlayer, RandomPlayer, UniformCostPlayer
+from player_model import HumanPlayer, RandomPlayer, UniformCostPlayer, UniformCostSimplePlayer
 from game_view import GameViewConnectFour
 
 
@@ -11,7 +11,7 @@ def main():
     view = GameViewConnectFour()
     player_a = HumanPlayer("X", "A", game)
     player_b = RandomPlayer("O", "B", game)
-    player_c = UniformCostPlayer(game)
+    player_c = UniformCostSimplePlayer(game)
     
     
     controller = GameControllerConnectFour(game, view)
