@@ -1,3 +1,5 @@
+import math
+
 from game_model import Game
 
 
@@ -21,8 +23,12 @@ class Node:
         return self.state.is_board_full()
 
     def child_node(self, action):
+        new_path_cost = None
         new_state = self.result(action)
-        new_path_cost = self.path_cost + 1 
+        if new_state.check_win(self.symbol):
+            new_path_cost = math.inf
+        else:
+            new_path_cost = self.path_cost + 1
         
         next_symbol = 'O' if self.symbol == 'X' else 'X'
         
