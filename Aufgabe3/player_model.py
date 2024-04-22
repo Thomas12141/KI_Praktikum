@@ -3,6 +3,7 @@ import heapq
 import random
 from abc import ABC, abstractmethod
 
+from Aufgabe3.board_model import Board
 from game_model import ConnectFour, Game
 from tree_utils import Node
 
@@ -136,7 +137,11 @@ class UniformCostSimplePlayer(Player):
     def get_symbol(self):
         return self.active_symbol
     def get_move(self) -> int:
+        print("No move is possible")
+
+        return 0
+
+    def get_solution(self) -> Board:
         self.active_symbol = self.symbols[0] if self.active_symbol == self.symbols[1] else self.symbols[1]
         Node = self.uniform_cost_search(self.game)
-        #implementierung der Lösung
-        return 0
+        return Node.state.board

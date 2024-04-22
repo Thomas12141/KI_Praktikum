@@ -83,11 +83,11 @@ class Board(ABC):
     @abstractmethod
     def __getitem__(self, key):
         return self.dic[key]
-    
+
     @abstractmethod
     def __len__(self):
         return len(self.dic)
-    
+
     @abstractmethod
     def copy(self) -> "Board":
         pass
@@ -107,7 +107,7 @@ class ConnectFourBoard(Board):
         self._init_board()
 
     def _init_board(self):
-        self.board = [Row([Cell(symbol=" ") for _ in range(2)]) for _ in range(2)]
+        self.board = [Row([Cell(symbol=" ") for _ in range(6)]) for _ in range(7)]
 
     def get_cell_value(self, index: int) -> str:
         return self.board[index]
@@ -129,13 +129,13 @@ class ConnectFourBoard(Board):
 
     def __getitem__(self, key):
         return self.board[key]
-    
+
     def is_full(self) -> bool:
         for i in range(len(self.board)):
             if not self.board[i].check_row_is_full():
                 return False
         return True
-    
+
     def copy(self):
         copy = ConnectFourBoard()
         for i in range(len(self.board)):
