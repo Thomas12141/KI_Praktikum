@@ -2,22 +2,20 @@
 Das heißt die Spielzüge ans Spiel weitergibt und den Status des Spiels an die View übergibt"""
 
 from abc import abstractmethod, ABC
+
+from board_model import Board
 from game_model import Game
-from player_model import Player
+from player_model import Player, UniformCostSimplePlayer
 from game_view import GameView
 
 
 class GameController(ABC):
     game: Game
     view: GameView
-    player1: Player
-    player2: Player
 
-    def __init__(self, game: Game, view: GameView, player1: Player, player2: Player) -> None:
+    def __init__(self, game: Game, view: GameView) -> None:
         self.game = game
         self.view = view
-        self.player1 = player1
-        self.player2 = player2
         pass
 
     @abstractmethod
@@ -46,3 +44,6 @@ class GameControllerConnectFour(GameController):
             self.view.draw(self.game.board)
             return True
         return False
+
+    def _play_whole_game(self, current_player: UniformCostSimplePlayer) -> Board:
+        return current_player.get_solution()

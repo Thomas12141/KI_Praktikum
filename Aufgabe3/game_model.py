@@ -31,6 +31,18 @@ class Game(ABC):
     @abstractmethod
     def is_board_full(self) -> bool:
         pass
+    
+    @abstractmethod
+    def copy(self):
+        pass
+    
+    @abstractmethod
+    def get_possible_moves(self):
+        pass
+
+    @abstractmethod
+    def to_tuple(self):
+        pass
 
 
 class TicTacToe(Game):
@@ -95,4 +107,20 @@ class ConnectFour(Game):
         return True
 
     def is_board_full(self) -> bool:
-        pass
+        return self.board.is_full()
+    
+    def get_possible_moves(self):
+        moves = []
+        len = self.board.__len__()
+        for i in range(len):
+            if self.board.check_row_is_full(i):
+                continue
+            moves.append(i)
+        return moves
+    
+    
+    def copy(self):
+        return ConnectFour(self.board.copy())
+    
+    def to_tuple(self):
+        return tuple(tuple(cell.symbol for cell in row) for row in self.board)
