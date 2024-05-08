@@ -1,0 +1,2 @@
+Um zu Tic-Tac-Toe anzupassen, muss die possible_moves zum Spiel angepasst werden, statt eine Zahl zwischen 0 und 6,
+ein vektor der Größe 2, wo die Werte sind zwischen 0 und 2.
