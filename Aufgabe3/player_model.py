@@ -8,6 +8,26 @@ from game_model import ConnectFour, Game
 from tree_utils import Node
 
 
+def prepare_game(game: Game, first_symbol: str, second_symbol: str):
+    # prefill the board for better testing
+    player_a = HumanPlayer(first_symbol, "A", game)
+    player_b = HumanPlayer(second_symbol, "B", game)
+    whos_turn = player_a
+
+    for j in range(7):
+        for i in range(j, 1 + j):
+            game.set_move(i, whos_turn.symbol)
+            game.set_move(i, whos_turn.symbol)
+            whos_turn = player_b if whos_turn == player_a else player_a
+            game.set_move(i, whos_turn.symbol)
+            game.set_move(i, whos_turn.symbol)
+            whos_turn = player_b if whos_turn == player_a else player_a
+            game.set_move(i, whos_turn.symbol)
+        whos_turn = player_b if whos_turn == player_a else player_a
+    game.set_move(0, player_b.symbol)
+    game.set_move(1, player_a.symbol)
+
+
 class Player(ABC):
     """MVC - MODEL"""
 
@@ -47,17 +67,17 @@ class HumanPlayer(Player):
             input("This field is not allowed. Please try again.")
             move = input("Choose a field for player " + self.name + " (symbol " + self.symbol + ")")
         return int(move)
-    
+
+
 class UniformCostPlayer(Player):
-    
     active_symbol = None
     game = None
-        
+
     def __init__(self, game: Game):
         self.symbols = ["X", "O"]
         self.active_symbol = self.symbols[0]
         self.game = game
-        
+
     def generate_possible_moves(self):
         moves = []
         len = self.game.board.__len__()
@@ -66,16 +86,14 @@ class UniformCostPlayer(Player):
                 continue
             moves.append(i)
         return moves
-    
-    
-    
+
     def evaluate(self, game: Game, symbol: str) -> int:
-        
+
         if game.check_win(symbol):
             return 100
-        
+
         return 0
-    
+
     def uniform_cost_search(self):
         frontier = [(self.game, 0, [])]
         while frontier:
@@ -95,46 +113,27 @@ class UniformCostPlayer(Player):
 
     def get_symbol(self):
         return self.active_symbol
+
     def get_move(self) -> int:
         self.active_symbol = self.symbols[0] if self.active_symbol == self.symbols[1] else self.symbols[1]
         return self.uniform_cost_search()
 
+
 class UniformCostSimplePlayer(Player):
-    
     active_symbol = None
     game = None
     winning_solution = None
-        
+
     def __init__(self, game: Game):
         self.symbols = ["X", "O"]
         self.active_symbol = self.symbols[0]
         self.game = game
-    
-    def prepare_game(self, game: Game):
-        #prefill the board for better testing
-        player_a = HumanPlayer("X", "A", game)
-        player_b = HumanPlayer("O", "B", game)
-        whos_turn = player_a
-        
-        for j in range(7):
-            for i in range(j, 1+j):
-                game.set_move(i, whos_turn.symbol)
-                game.set_move(i, whos_turn.symbol)
-                whos_turn = player_b if whos_turn == player_a else player_a
-                game.set_move(i, whos_turn.symbol)
-                game.set_move(i, whos_turn.symbol)
-                whos_turn = player_b if whos_turn == player_a else player_a
-                game.set_move(i, whos_turn.symbol)
-            whos_turn = player_b if whos_turn == player_a else player_a
-        game.set_move(0, player_b.symbol)
-        game.set_move(1, player_a.symbol)
 
-    
     def uniform_cost_search(self, problem: Game):
-        
+
         #reduce testing time
-        self.prepare_game(problem)
-        
+        prepare_game(problem, "X", "O")
+
         initial_node = Node(problem)
         frontier = []
         heapq.heappush(frontier, (initial_node.path_cost, initial_node))
@@ -142,17 +141,20 @@ class UniformCostSimplePlayer(Player):
 
         while frontier:
             _, node = heapq.heappop(frontier)
-            
-            if node.is_goal_state():  
-                return node  
-            
-            explored.add(tuple(node.state_tuple()))  
-            
+
+            if node.is_goal_state():
+                return node
+
+            explored.add(tuple(node.state_tuple()))
+
             for action in node.actions():
                 child = node.child_node(action)
-                if child.state_tuple() not in explored and all(child.state_tuple() != other[1].state_tuple() for other in frontier):
+                if child.state_tuple() not in explored and all(
+                        child.state_tuple() != other[1].state_tuple() for other in frontier):
                     heapq.heappush(frontier, (child.path_cost, child))
-                elif any(child.state_tuple() == other[1].state_tuple() and child.path_cost < other[1].path_cost for other in frontier):
+                elif any(
+                        child.state_tuple() == other[1].state_tuple() and child.path_cost < other[1].path_cost for other
+                        in frontier):
                     index = next(i for i, v in enumerate(frontier) if v[1].state_tuple() == child.state_tuple())
                     frontier[index] = (child.path_cost, child)
                     heapq.heapify(frontier)
@@ -161,13 +163,14 @@ class UniformCostSimplePlayer(Player):
 
     def get_symbol(self):
         return self.active_symbol
+
     def get_move(self) -> int:
         self.active_symbol = self.symbols[0] if self.active_symbol == self.symbols[1] else self.symbols[1]
-        if(self.winning_solution):
+        if (self.winning_solution):
             next_action = self.winning_solution[0]
             self.winning_solution = self.winning_solution[1:]
             return next_action
-        
+
         self.winning_node = self.uniform_cost_search(self.game)
         self.winning_solution = self.winning_node.solution()
         return 0
