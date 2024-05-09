@@ -1,0 +1,12 @@
+{"directed": false, "multigraph": false, "graph": [],
+  "nodes": [{"city": "London", "id": "a"}, {"city": "Berlin", "id": "b"}, {"city": "Madrid", "id": "c"}, {"city": "Kyiv", "id": "d"}, {"city": "Rome", "id": "e"}, {"city": "Paris", "id": "f"}, {"city": "Moscow", "id": "g"}, {"city": "Stockholm", "id": "h"}, {"city": "Dublin", "id": "i"}, {"city": "Bucharest", "id": "j"}],
+  "adjacency": [[{"weight": 999, "id": "h"}, {"weight": 576, "id": "f"}, {"weight": 414, "id": "i"}],
+  [{"weight": 1062, "id": "j"}, {"weight": 1299, "id": "g"}, {"weight": 480, "id": "h"}, {"weight": 735, "id": "f"}],
+  [{"weight": 903, "id": "f"}, {"weight": 4092, "id": "e"}],
+  [{"weight": 492, "id": "j"}, {"weight": 627, "id": "g"}],
+  [{"weight": 4092, "id": "c"}, {"weight": 792, "id": "f"}, {"weight": 933, "id": "j"}],
+  [{"weight": 903, "id": "c"}, {"weight": 792, "id": "e"}, {"weight": 735, "id": "b"}, {"weight": 576, "id": "a"}],
+  [{"weight": 627, "id": "d"}, {"weight": 1299, "id": "b"}, {"weight": 819, "id": "h"}],
+  [{"weight": 819, "id": "g"}, {"weight": 480, "id": "b"}, {"weight": 999, "id": "a"}],
+  [{"weight": 414, "id": "a"}],
+  [{"weight": 933, "id": "e"}, {"weight": 1062, "id": "b"}, {"weight": 492, "id": "d"}]]}
