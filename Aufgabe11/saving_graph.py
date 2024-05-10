@@ -33,8 +33,3 @@ def creating_graph() -> nx.Graph:
     graph.add_edge("a", "i", weight=414)
     return graph
 
-graph = creating_graph()
-
-print(graph.adj["a"]["h"]["weight"])
-with open("graph.json", "w") as output_file:
-    json.dump(json_graph.adjacency_data(creating_graph()), output_file)
