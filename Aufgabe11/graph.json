@@ -1,12 +1,1 @@
-{"directed": false, "multigraph": false, "graph": [],
-  "nodes": [{"city": "London", "id": "a"}, {"city": "Berlin", "id": "b"}, {"city": "Madrid", "id": "c"}, {"city": "Kyiv", "id": "d"}, {"city": "Rome", "id": "e"}, {"city": "Paris", "id": "f"}, {"city": "Moscow", "id": "g"}, {"city": "Stockholm", "id": "h"}, {"city": "Dublin", "id": "i"}, {"city": "Bucharest", "id": "j"}],
-  "adjacency": [[{"weight": 999, "id": "h"}, {"weight": 576, "id": "f"}, {"weight": 414, "id": "i"}],
-  [{"weight": 1062, "id": "j"}, {"weight": 1299, "id": "g"}, {"weight": 480, "id": "h"}, {"weight": 735, "id": "f"}],
-  [{"weight": 903, "id": "f"}, {"weight": 4092, "id": "e"}],
-  [{"weight": 492, "id": "j"}, {"weight": 627, "id": "g"}],
-  [{"weight": 4092, "id": "c"}, {"weight": 792, "id": "f"}, {"weight": 933, "id": "j"}],
-  [{"weight": 903, "id": "c"}, {"weight": 792, "id": "e"}, {"weight": 735, "id": "b"}, {"weight": 576, "id": "a"}],
-  [{"weight": 627, "id": "d"}, {"weight": 1299, "id": "b"}, {"weight": 819, "id": "h"}],
-  [{"weight": 819, "id": "g"}, {"weight": 480, "id": "b"}, {"weight": 999, "id": "a"}],
-  [{"weight": 414, "id": "a"}],
-  [{"weight": 933, "id": "e"}, {"weight": 1062, "id": "b"}, {"weight": 492, "id": "d"}]]}
+{"directed": false, "multigraph": false, "graph": [], "nodes": [{"city": "London", "x": 2, "y": 7, "id": "a"}, {"city": "Berlin", "x": 5, "y": 5, "id": "b"}, {"city": "Madrid", "x": 0, "y": 0, "id": "c"}, {"city": "Kyiv", "x": 9, "y": 5, "id": "d"}, {"city": "Rome", "x": 5, "y": 0, "id": "e"}, {"city": "Paris", "x": 4, "y": 3, "id": "f"}, {"city": "Moscow", "x": 10, "y": 10, "id": "g"}, {"city": "Stockholm", "x": 6, "y": 9, "id": "h"}, {"city": "Dublin", "x": 1, "y": 8, "id": "i"}, {"city": "Bucharest", "x": 8, "y": 4, "id": "j"}], "adjacency": [[{"weight": 999, "id": "h"}, {"weight": 576, "id": "f"}, {"weight": 414, "id": "i"}], [{"weight": 1062, "id": "j"}, {"weight": 1299, "id": "g"}, {"weight": 480, "id": "h"}, {"weight": 735, "id": "f"}], [{"weight": 903, "id": "f"}, {"weight": 4092, "id": "e"}], [{"weight": 492, "id": "j"}, {"weight": 627, "id": "g"}], [{"weight": 4092, "id": "c"}, {"weight": 792, "id": "f"}, {"weight": 933, "id": "j"}], [{"weight": 903, "id": "c"}, {"weight": 792, "id": "e"}, {"weight": 735, "id": "b"}, {"weight": 576, "id": "a"}], [{"weight": 627, "id": "d"}, {"weight": 1299, "id": "b"}, {"weight": 819, "id": "h"}], [{"weight": 819, "id": "g"}, {"weight": 480, "id": "b"}, {"weight": 999, "id": "a"}], [{"weight": 414, "id": "a"}], [{"weight": 933, "id": "e"}, {"weight": 1062, "id": "b"}, {"weight": 492, "id": "d"}]]}
