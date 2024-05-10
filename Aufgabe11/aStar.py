@@ -46,4 +46,28 @@ class Node:
         return math.sqrt(x ** 2 + y ** 2) * 150
 
 
-print(aStarSearch("a", "c", creating_graph()))
+print("Woher willst du fahren?")
+start = input()
+print("Wohin willst du fahren?")
+end = input()
+iterator = aStarSearch(start, end, creating_graph())
+
+length = iterator[1].path_length
+
+iterator = iterator[1]
+
+queue = []
+
+while iterator.parent is not None:
+    queue.append(iterator)
+    iterator = iterator.parent[1]
+queue.append(iterator)
+string = "The length is: " + str(length) + "\nThe best route is: " + queue.pop().symbol
+
+queue.reverse()
+
+
+for node in queue:
+    string += " -> " + node.symbol
+
+print(string)
