@@ -9,6 +9,7 @@ from Aufgabe3.tree_utils import Node
 class MinimaxPlayer(Player):
     symbol = None
     other_symbol = None
+    count_nodes = 0
 
     def __init__(self, game: Game, symbol: str, other_symbol: str):
         self.symbol = symbol
@@ -36,10 +37,13 @@ class MinimaxPlayer(Player):
         max = -math.inf
         for move in moves:
             copy = deepcopy(self)
+            count_nodes += 1
             copy.game.set_move(move, self.symbol)
             if copy.min_value() > max:
                 max = copy.min_value()
+                
                 result = move
+        print(count_nodes + " nodes were created")
         return result
 
     def max_value(self) -> int:
@@ -49,6 +53,7 @@ class MinimaxPlayer(Player):
         result = -math.inf
         for move in moves:
             copy = deepcopy(self)
+            count_nodes += 1
             copy.game.set_move(move, self.other_symbol)
             result = max(result, copy.min_value())
         return result
@@ -60,6 +65,7 @@ class MinimaxPlayer(Player):
         result = math.inf
         for move in moves:
             copy = deepcopy(self)
+            count_nodes += 1
             copy.game.set_move(move, self.symbol)
             result = min(result, copy.max_value())
         return result
