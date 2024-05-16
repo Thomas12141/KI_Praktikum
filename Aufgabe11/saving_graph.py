@@ -6,16 +6,16 @@ from networkx.readwrite import json_graph
 
 def creating_graph() -> nx.Graph:
     graph = nx.Graph()
-    graph.add_node("a", city="London")
-    graph.add_node("b", city="Berlin")
-    graph.add_node("c", city="Madrid")
-    graph.add_node("d", city="Kyiv")
-    graph.add_node("e", city="Rome")
-    graph.add_node("f", city="Paris")
-    graph.add_node("g", city="Moscow")
-    graph.add_node("h", city="Stockholm")
-    graph.add_node("i", city="Dublin")
-    graph.add_node("j", city="Bucharest")
+    graph.add_node("a", city="London", x=2, y=7)
+    graph.add_node("b", city="Berlin", x=5, y=5)
+    graph.add_node("c", city="Madrid", x=0, y=0)
+    graph.add_node("d", city="Kyiv", x=9, y=5)
+    graph.add_node("e", city="Rome", x=5, y=0)
+    graph.add_node("f", city="Paris", x=4, y=3)
+    graph.add_node("g", city="Moscow", x=10, y=10)
+    graph.add_node("h", city="Stockholm", x=6, y=9)
+    graph.add_node("i", city="Dublin", x=1, y=8)
+    graph.add_node("j", city="Bucharest", x=8, y=4)
 
     graph.add_edge("c", "f", weight=903)
     graph.add_edge("c", "e", weight=4092)
@@ -33,6 +33,3 @@ def creating_graph() -> nx.Graph:
     graph.add_edge("a", "i", weight=414)
     return graph
 
-
-with open("graph.json", "w") as output_file:
-    json.dump(json_graph.adjacency_data(creating_graph()), output_file)
