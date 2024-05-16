@@ -5,7 +5,7 @@ from Aufgabe3.game_model import Game
 from Aufgabe3.player_model import Player, prepare_game
 from Aufgabe3.tree_utils import Node
 
-
+count_nodes = 0
 class MinimaxPlayer(Player):
     symbol = None
     other_symbol = None
@@ -37,13 +37,13 @@ class MinimaxPlayer(Player):
         max = -math.inf
         for move in moves:
             copy = deepcopy(self)
-            count_nodes += 1
+            MinimaxPlayer.count_nodes += 1
             copy.game.set_move(move, self.symbol)
             if copy.min_value() > max:
                 max = copy.min_value()
                 
                 result = move
-        print(count_nodes + " nodes were created")
+        print(str(MinimaxPlayer.count_nodes) + " nodes were created")
         return result
 
     def max_value(self) -> int:
@@ -53,7 +53,7 @@ class MinimaxPlayer(Player):
         result = -math.inf
         for move in moves:
             copy = deepcopy(self)
-            count_nodes += 1
+            MinimaxPlayer.count_nodes += 1
             copy.game.set_move(move, self.other_symbol)
             result = max(result, copy.min_value())
         return result
@@ -65,7 +65,7 @@ class MinimaxPlayer(Player):
         result = math.inf
         for move in moves:
             copy = deepcopy(self)
-            count_nodes += 1
+            MinimaxPlayer.count_nodes += 1
             copy.game.set_move(move, self.symbol)
             result = min(result, copy.max_value())
         return result

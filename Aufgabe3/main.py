@@ -1,3 +1,4 @@
+from Aufgabe10.alpha_beta import AlphaBetaPlayer
 from Aufgabe8.minimax import MinimaxPlayer
 from game_controller import GameControllerConnectFour
 from board_model import ConnectFourBoard, Cell
@@ -10,8 +11,8 @@ def main():
     board = ConnectFourBoard()
     game = ConnectFour(board)
     view = GameViewConnectFour()
-    player_a = MinimaxPlayer(game, "X", "O")
-    player_b = MinimaxPlayer(game,"O", "X")
+    player_a = AlphaBetaPlayer(game, "X", "O")
+    player_b = AlphaBetaPlayer(game,"O", "X")
     prepare_game(game, "X", "O")
     controller = GameControllerConnectFour(game, view)
     whos_turn = player_a

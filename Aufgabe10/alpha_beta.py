@@ -2,8 +2,7 @@ import math
 from copy import deepcopy
 
 from Aufgabe3.game_model import Game
-from Aufgabe3.player_model import Player, prepare_game
-from Aufgabe3.tree_utils import Node
+from Aufgabe3.player_model import Player
 
 
 class AlphaBetaPlayer(Player):
@@ -34,15 +33,15 @@ class AlphaBetaPlayer(Player):
     def get_move(self) -> int:
         moves = self.game.get_possible_moves()
         result = -1
-        min = math.inf
+        max = -math.inf
         for move in moves:
             copy = deepcopy(self)
-            count_nodes += 1
+            AlphaBetaPlayer.count_nodes += 1
             copy.game.set_move(move, self.symbol)
-            if copy.min_value() < min:
-                min = copy.min_value(-math.inf, math.inf)
+            if copy.min_value(-math.inf, math.inf) > max:
+                max = copy.min_value(-math.inf, math.inf)
                 result = move
-        print(count_nodes + " nodes were created")
+        print(str(AlphaBetaPlayer.count_nodes) + " nodes were created")
         return result
 
     def max_value(self, alpha, beta) -> int:
@@ -52,7 +51,7 @@ class AlphaBetaPlayer(Player):
         result = -math.inf
         for move in moves:
             copy = deepcopy(self)
-            count_nodes += 1
+            AlphaBetaPlayer.count_nodes += 1
             copy.game.set_move(move, self.other_symbol)
             temp= copy.min_value(alpha, beta)
             if temp > result:
@@ -69,7 +68,7 @@ class AlphaBetaPlayer(Player):
         result = math.inf
         for move in moves:
             copy = deepcopy(self)
-            count_nodes += 1
+            AlphaBetaPlayer.count_nodes += 1
             copy.game.set_move(move, self.symbol)
             temp = copy.max_value(alpha, beta)
             if temp < result:
