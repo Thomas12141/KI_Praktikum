@@ -10,13 +10,12 @@ def main():
     board = ConnectFourBoard()
     game = ConnectFour(board)
     view = GameViewConnectFour()
-    player_a = HumanPlayer("X", "Thomas", game)
+    player_a = MinimaxPlayer(game, "X", "O")
     player_b = MinimaxPlayer(game,"O", "X")
     prepare_game(game, "X", "O")
     controller = GameControllerConnectFour(game, view)
     whos_turn = player_a
     while True:
-        view.draw(board)
         controller._play_one_round(whos_turn)
         if game.check_win(whos_turn.get_symbol()):
             print("The winner is " + whos_turn.get_symbol() + ".")

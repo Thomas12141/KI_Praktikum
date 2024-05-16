@@ -14,15 +14,10 @@ def prepare_game(game: Game, first_symbol: str, second_symbol: str):
     player_b = HumanPlayer(second_symbol, "B", game)
     whos_turn = player_a
 
-    for j in range(5):
-        game.set_move(j, whos_turn.symbol)
-        game.set_move(j, whos_turn.symbol)
-        whos_turn = player_b if whos_turn == player_a else player_a
-        game.set_move(j, whos_turn.symbol)
-        game.set_move(j, whos_turn.symbol)
-        whos_turn = player_b if whos_turn == player_a else player_a
-        game.set_move(j, whos_turn.symbol)
-        whos_turn = player_b if whos_turn == player_a else player_a
+    for i in range(2):
+        for j in range(5):
+            game.set_move(j, whos_turn.symbol)
+            whos_turn = player_b if whos_turn == player_a else player_a
 
 
 class Player(ABC):

@@ -107,7 +107,7 @@ class ConnectFourBoard(Board):
         self._init_board()
 
     def _init_board(self):
-        self.board = [Row([Cell(symbol=" ") for _ in range(6)]) for _ in range(7)]
+        self.board = [Row([Cell(symbol=" ") for _ in range(4)]) for _ in range(5)]
 
     def get_cell_value(self, index: int) -> str:
         return self.board[index]
