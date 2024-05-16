@@ -31,11 +31,11 @@ class Game(ABC):
     @abstractmethod
     def is_board_full(self) -> bool:
         pass
-    
+
     @abstractmethod
     def copy(self):
         pass
-    
+
     @abstractmethod
     def get_possible_moves(self):
         pass
@@ -81,19 +81,13 @@ class ConnectFour(Game):
         return False
 
     def _check_diagonal(self, symbol: str) -> bool:
-        for i in range(3, len(self.board) - 3):
-            for j in range(3, len(self.board[0]) - 3):
+        for i in range(0, len(self.board) - 3):
+            for j in range(0, len(self.board[0]) - 3):
                 if self.board[i][j].symbol == symbol and self.board[i + 1][j + 1].symbol == symbol and \
                         self.board[i + 2][j + 2].symbol == symbol and self.board[i + 3][j + 3].symbol == symbol:
                     return True
-                if self.board[i][j].symbol == symbol and self.board[i + 1][j - 1].symbol == symbol and \
-                        self.board[i + 2][j - 2].symbol == symbol and self.board[i + 3][j - 3].symbol == symbol:
-                    return True
-                if self.board[i][j].symbol == symbol and self.board[i - 1][j + 1].symbol == symbol and \
-                        self.board[i - 2][j + 2].symbol == symbol and self.board[i - 3][j + 3].symbol == symbol:
-                    return True
-                if self.board[i][j].symbol == symbol and self.board[i - 1][j - 1].symbol == symbol and \
-                        self.board[i - 2][j - 2].symbol == symbol and self.board[i - 3][j - 3].symbol == symbol:
+                if self.board[i][j+3].symbol == symbol and self.board[i + 1][j + 2].symbol == symbol and \
+                        self.board[i + 2][j + 1].symbol == symbol and self.board[i + 3][j].symbol == symbol:
                     return True
         return False
 
@@ -108,7 +102,7 @@ class ConnectFour(Game):
 
     def is_board_full(self) -> bool:
         return self.board.is_full()
-    
+
     def get_possible_moves(self):
         moves = []
         len = self.board.__len__()
@@ -117,10 +111,9 @@ class ConnectFour(Game):
                 continue
             moves.append(i)
         return moves
-    
-    
+
     def copy(self):
         return ConnectFour(self.board.copy())
-    
+
     def to_tuple(self):
         return tuple(tuple(cell.symbol for cell in row) for row in self.board)

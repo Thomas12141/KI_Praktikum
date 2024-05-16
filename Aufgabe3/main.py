@@ -19,10 +19,10 @@ def main():
         controller._play_one_round(whos_turn)
         if game.check_win(whos_turn.get_symbol()):
             print("The winner is " + whos_turn.get_symbol() + ".")
-            break
-        if board.is_full():
+            return
+        elif board.is_full():
             print("The game is over, without a winner.")
-            break
+            return
         whos_turn = player_a if whos_turn == player_b else player_b
 
 if __name__ == '__main__':

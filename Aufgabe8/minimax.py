@@ -33,12 +33,12 @@ class MinimaxPlayer(Player):
     def get_move(self) -> int:
         moves = self.game.get_possible_moves()
         result = -1
-        min = math.inf
+        max = -math.inf
         for move in moves:
             copy = deepcopy(self)
             copy.game.set_move(move, self.symbol)
-            if copy.min_value() < min:
-                min = copy.min_value()
+            if copy.min_value() > max:
+                max = copy.min_value()
                 result = move
         return result
 
