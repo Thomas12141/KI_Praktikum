@@ -43,7 +43,7 @@ class Node:
             return 0
         x = self.graph.nodes.get(self.parent[1].symbol).get("x") - self.graph.nodes.get(self.symbol).get("x")
         y = self.graph.nodes.get(self.parent[1].symbol).get("y") - self.graph.nodes.get(self.symbol).get("y")
-        return math.sqrt(x ** 2 + y ** 2) * 150
+        return math.sqrt(x ** 2 + y ** 2) * 100
 
 
 print("Woher willst du fahren?")

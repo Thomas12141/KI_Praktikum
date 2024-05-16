@@ -23,9 +23,9 @@ class MinimaxPlayer(Player):
         if self.game.check_win(self.symbol):
             return 1
         elif self.game.check_win(self.other_symbol):
-            return 0
-        else:
             return -1
+        else:
+            return 0
 
     def get_symbol(self) -> str:
         return self.symbol
@@ -49,7 +49,7 @@ class MinimaxPlayer(Player):
         result = -math.inf
         for move in moves:
             copy = deepcopy(self)
-            copy.game.set_move(move, self.symbol)
+            copy.game.set_move(move, self.other_symbol)
             result = max(result, copy.min_value())
         return result
 
