@@ -4,7 +4,7 @@ from queue import PriorityQueue
 
 from networkx import Graph
 
-from Aufgabe11.saving_graph import creating_graph
+from saving_graph import creating_graph
 
 
 def aStarSearch(start: str, end: str, graph: Graph):
@@ -46,7 +46,7 @@ class Node:
         return math.sqrt(x ** 2 + y ** 2) * 100
 
 
-print("Woher willst du fahren?")
+print("Wo möchtest du starten?")
 start = input()
 print("Wohin willst du fahren?")
 end = input()
