@@ -22,11 +22,11 @@ class MinimaxPlayer(Player):
 
     def utility(self) -> int:
         if self.game.check_win(self.symbol):
-            return 1
-        elif self.game.check_win(self.other_symbol):
-            return -1
-        else:
             return 0
+        elif self.game.check_win(self.other_symbol):
+            return 10
+        else:
+            return 5
 
     def get_symbol(self) -> str:
         return self.symbol
@@ -39,8 +39,9 @@ class MinimaxPlayer(Player):
             copy = deepcopy(self)
             MinimaxPlayer.count_nodes += 1
             copy.game.set_move(move, self.symbol)
-            if copy.min_value() > max:
-                max = copy.min_value()
+            temp = copy.min_value()
+            if temp > max:
+                max = temp
                 
                 result = move
         print(str(MinimaxPlayer.count_nodes) + " nodes were created")
@@ -54,7 +55,7 @@ class MinimaxPlayer(Player):
         for move in moves:
             copy = deepcopy(self)
             MinimaxPlayer.count_nodes += 1
-            copy.game.set_move(move, self.other_symbol)
+            copy.game.set_move(move, copy.symbol)
             result = max(result, copy.min_value())
         return result
 
@@ -66,7 +67,7 @@ class MinimaxPlayer(Player):
         for move in moves:
             copy = deepcopy(self)
             MinimaxPlayer.count_nodes += 1
-            copy.game.set_move(move, self.symbol)
+            copy.game.set_move(move, copy.other_symbol)
             result = min(result, copy.max_value())
         return result
 

@@ -21,11 +21,11 @@ class AlphaBetaPlayer(Player):
 
     def utility(self) -> int:
         if self.game.check_win(self.symbol):
-            return 1
+            return 5
         elif self.game.check_win(self.other_symbol):
-            return -1
+            return 5
         else:
-            return 0
+            return 10
 
     def get_symbol(self) -> str:
         return self.symbol
@@ -52,7 +52,7 @@ class AlphaBetaPlayer(Player):
         for move in moves:
             copy = deepcopy(self)
             AlphaBetaPlayer.count_nodes += 1
-            copy.game.set_move(move, self.other_symbol)
+            copy.game.set_move(move, self.symbol)
             temp= copy.min_value(alpha, beta)
             if temp > result:
                 result = temp
@@ -69,7 +69,7 @@ class AlphaBetaPlayer(Player):
         for move in moves:
             copy = deepcopy(self)
             AlphaBetaPlayer.count_nodes += 1
-            copy.game.set_move(move, self.symbol)
+            copy.game.set_move(move, self.other_symbol)
             temp = copy.max_value(alpha, beta)
             if temp < result:
                 result = temp

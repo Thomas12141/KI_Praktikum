@@ -38,7 +38,7 @@ class Node:
         self.path_length = path_length
         self.parent = parent
 
-    def heuristic(self):
+    def heuristic(self) -> float:
         if self.parent is None:
             return 0
         x = self.graph.nodes.get(self.parent[1].symbol).get("x") - self.graph.nodes.get(self.symbol).get("x")

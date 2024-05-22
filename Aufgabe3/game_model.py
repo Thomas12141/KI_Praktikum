@@ -75,7 +75,7 @@ class ConnectFour(Game):
     def _check_vertical(self, symbol: str) -> bool:
         for i in range(len(self.board) - 3):
             for j in range(len(self.board[0])):
-                if self.board[i][j].symbol == (symbol) and self.board[i + 1][j].symbol == symbol and \
+                if self.board[i][j].symbol == symbol and self.board[i + 1][j].symbol == symbol and \
                         self.board[i + 2][j].symbol == symbol and self.board[i + 3][j].symbol == symbol:
                     return True
         return False
