@@ -1,4 +1,4 @@
-from nltk import Valuation, Assignment, Model, Tree
+from nltk import Valuation, Assignment, Model
 from nltk.sem.logic import *
 #parser erzeugen.
 bool_exp_parser = LogicParser(True)

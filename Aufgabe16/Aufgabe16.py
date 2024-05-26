@@ -3,7 +3,7 @@ from nltk import Model, Valuation, Assignment
 from Aufgabe15.Aufgabe15 import create_kb
 
 
-def check_all_kb(kb: set, model: Model) -> bool:
+def check_all_kb(kb: list, model: Model) -> bool:
     for knowledge in kb:
         if not model.satisfy(knowledge, Assignment(set([]))):
             return False
