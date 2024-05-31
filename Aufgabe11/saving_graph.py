@@ -1,11 +1,9 @@
 import json
 
-import networkx as nx
-from networkx.readwrite import json_graph
+from graph_utils import Graph
 
-
-def creating_graph() -> nx.Graph:
-    graph = nx.Graph()
+def creating_graph() -> Graph:
+    graph = Graph()
     graph.add_node("a", city="London", x=2, y=7)
     graph.add_node("b", city="Berlin", x=5, y=5)
     graph.add_node("c", city="Madrid", x=0, y=0)
