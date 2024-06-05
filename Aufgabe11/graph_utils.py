@@ -52,8 +52,9 @@ class Graph :
     
     def get_edge_weight(self, start, end):
         edge = self.get_edge(start, end)
+        
         if edge is not None:
-            return edge.weight
+            return edge.weight 
         return None
     
     def get_heuristic(self, start, end):

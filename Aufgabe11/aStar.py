@@ -28,7 +28,7 @@ class Node:
         self.parent = parent
         self.path_length = 0
         if parent is not None:
-            self.path_length = parent.path_length + graph.get_edge_weight(parent.symbol, symbol)
+            self.path_length = parent.path_length + graph.get_edge_weight(parent.symbol, symbol) + graph.get_heuristic(symbol, end)
 
     def __lt__(self, other):
         return self.path_length < other.path_length
