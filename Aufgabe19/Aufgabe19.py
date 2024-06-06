@@ -28,9 +28,11 @@ def tt_check_all(kb: list, query, symbols: list, model: dict, rows: list):
         add_all_symbols_values(model, row)
         if check_all_kb(kb, model, row):
             result = check_all_kb(list(query), model, row)
+            row.append(str(result))
             rows.append(row)
             return result
         else:
+            row.append(str(True))
             row.append(str(True))
             rows.append(row)
             return True
@@ -43,7 +45,7 @@ def tt_check_all(kb: list, query, symbols: list, model: dict, rows: list):
         model_with_false[p] = False
         model_with_false.update(model)
 
-        return tt_check_all(kb, query, symbols.copy(), model_with_false, rows) and tt_check_all(kb, query,
+        return tt_check_all(kb, query, symbols.copy(), model_with_false, rows) & tt_check_all(kb, query,
                                                                                                 symbols.copy(),
                                                                                                 model_with_true, rows)
 
@@ -69,5 +71,6 @@ rows = []
 
 bool_exp_parser = LogicParser(True)
 headers.append("A->(B->(C->D))")
+headers.append("Check all")
 tt_check_all(kb.set, {bool_exp_parser.parse("A->(B->(C->D))")}, symbols.copy(), dict(), rows)
 print(tabulate(rows, headers=headers, tablefmt='orgtbl'))
