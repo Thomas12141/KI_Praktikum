@@ -61,7 +61,7 @@ class Graph :
         node_end = self.get_node(end)
         x = node_start.pos_x - node_end.pos_x
         y = node_start.pos_y - node_end.pos_y
-        return math.sqrt(x ** 2 + y ** 2) * 100
+        return math.sqrt(x ** 2 + y ** 2) * 0
     
     def __str__(self):
         result = ""
