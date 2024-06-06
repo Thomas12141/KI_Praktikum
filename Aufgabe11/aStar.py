@@ -1,12 +1,10 @@
 import heapq
-import math
-from queue import PriorityQueue
 
 from graph_utils import Graph
 from saving_graph import creating_graph
 
-
 def aStarSearch(start: str, end: str, graph: Graph):
+    counter = 0
     initial_node = Node(graph, start, end)
     explored = set()
     frontier = []
@@ -14,8 +12,10 @@ def aStarSearch(start: str, end: str, graph: Graph):
     while frontier:
         node = heapq.heappop(frontier)
         if node.symbol == end:
+            print("Number of nodes created: ", counter)
             return node.path_length, node
         explored.add(node.symbol)
+        counter += 1
         for neighbor in graph.get_neighbors(node.symbol):
             if neighbor not in explored:
                 child = Node(graph, neighbor, end, node)
