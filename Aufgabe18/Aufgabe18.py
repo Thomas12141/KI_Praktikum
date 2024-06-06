@@ -2,7 +2,7 @@ import nltk
 from nltk import Model, Valuation
 from nltk.sem.logic import LogicParser
 
-from Aufgabe15.Aufgabe15 import create_kb
+from Aufgabe15.Aufgabe15 import KnowledgeBase
 from Aufgabe16.Aufgabe16 import check_all_kb
 
 
@@ -27,5 +27,7 @@ def tt_check_all(kb: list, query, symbols: set, model: dict):
 
 bool_exp_parser = LogicParser(True)
 
-kb = ["A<=>B", "B=>C"]
-tt_check_all(kb, {bool_exp_parser.parse("A")}, {"A", "B", "C"}, dict())
+kb = KnowledgeBase()
+kb.tell("A<=>B")
+kb.tell("B=>C")
+print(tt_check_all(kb.set, {bool_exp_parser.parse("A")}, {"A", "B", "C"}, dict()))

@@ -38,5 +38,3 @@ def check_all_kb(kb: list, variables: dict) -> bool:
 
 knowledge_base = create_kb()
 
-print(check_all_kb(knowledge_base.set, {"A": True, "B": True, "C": True, "D": True}))
-
