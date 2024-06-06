@@ -7,25 +7,26 @@ def evaluate(expr, variables) -> bool:
     """
     traverse the tree and evalutes the expression
     """
-    if isinstance(expr, AndExpression):
-        return evaluate(expr.first, variables) and evaluate(expr.second, variables)
-    elif isinstance(expr, OrExpression):
-        return evaluate(expr.first, variables) or evaluate(expr.second, variables)
-    elif isinstance(expr, ImpExpression):
-        return not evaluate(expr.first, variables) or evaluate(expr.second, variables)
-    elif isinstance(expr, NegatedExpression):
-        return not evaluate(expr.term, variables)
-    elif isinstance(expr, IffExpression):
-        return evaluate(expr.first, variables) is evaluate(expr.second, variables)
-    elif isinstance(expr, FunctionVariableExpression):
-        v = str(expr.variable)
-        if v not in variables:
-            print("Varibale undefined, default False")
-            return False
-        return variables.get(v)
-    else:
-        print("Node not found")
-        exit(1)
+    match expr:
+        case AndExpression():
+            return evaluate(expr.first, variables) and evaluate(expr.second, variables)
+        case OrExpression():
+            return evaluate(expr.first, variables) or evaluate(expr.second, variables)
+        case ImpExpression():
+            return not evaluate(expr.first, variables) or evaluate(expr.second, variables)
+        case NegatedExpression():
+            return not evaluate(expr.term, variables)
+        case IffExpression():
+            return evaluate(expr.first, variables) is evaluate(expr.second, variables)
+        case FunctionVariableExpression():
+            v = str(expr.variable)
+            if v not in variables:
+                print("Varibale undefined, default False")
+                return False
+            return variables.get(v)
+        case _:
+            print("Node not found")
+            exit(1)
 
 
 def check_all_kb(kb: list, variables: dict) -> bool:
@@ -37,4 +38,5 @@ def check_all_kb(kb: list, variables: dict) -> bool:
 
 knowledge_base = create_kb()
 
-print(check_all_kb(knowledge_base.set, {"A": True, "B": True, "C": False, "D": True}))
+print(check_all_kb(knowledge_base.set, {"A": True, "B": True, "C": True, "D": True}))
+
