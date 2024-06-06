@@ -1,4 +1,3 @@
-from nltk import Model, Valuation, Assignment
 from nltk.sem.logic import *
 
 from Aufgabe15.Aufgabe15 import create_kb
