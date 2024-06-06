@@ -9,6 +9,6 @@ parse_result = bool_exp_parser.parse("(A & C -> B | D) & (A & C <-> B | D)"
                                      + "& (A -> C <-> B -> D) & (A | C <-> B | D)"
                                      + " & (A | C -> B & D)")
 #Bildet ein Model
-model = Model(set([]), Valuation([('A', True), ('B', True), ('C', False), ('D', False)]))
+model = Model(set([]), Valuation([('A', True), ('B', True), ('C', True), ('D', True)]))
 #Prüft ob dieser model diesen Baum auch erfüllt
 print(model.satisfy(parse_result, Assignment(set([]))))

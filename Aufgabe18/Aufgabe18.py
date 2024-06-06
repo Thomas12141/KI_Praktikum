@@ -27,4 +27,5 @@ def tt_check_all(kb: list, query, symbols: set, model: dict):
 
 bool_exp_parser = LogicParser(True)
 
-tt_check_all(create_kb().set, {bool_exp_parser.parse("A & C -> B | D")}, {"A", "B", "C", "D"}, dict())
+kb = ["A<=>B", "B=>C"]
+tt_check_all(kb, {bool_exp_parser.parse("A")}, {"A", "B", "C"}, dict())
