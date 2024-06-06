@@ -32,12 +32,12 @@ def tt_check_all(kb: list, query, symbols: list, model: dict, rows: list):
             rows.append(row)
             return result
         else:
-            row.append(str(True))
-            row.append(str(True))
+            result = check_all_kb(list(query), model, row)
+            row.append(str(result))
             rows.append(row)
             return True
     else:
-        p = symbols.pop(0)
+        p = symbols.pop()
         model_with_true = dict()
         model_with_true[p] = True
         model_with_true.update(model)
