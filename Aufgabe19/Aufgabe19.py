@@ -59,27 +59,18 @@ def create_kb():
 
 
 headers = []
-symbols = ["A", "B"]
+symbols = ["A", "B", "C", "D"]
 for symbol in symbols:
     headers.append(symbol)
 kb = create_kb()
 
 for knowledge in kb.set:
     headers.append(str(knowledge))
-kb = KnowledgeBase()
-kb.tell("A=>B")
-kb.tell("A<=>B")
-kb.tell("A")
-kb.tell("-A")
-kb.tell("A&B")
+
 rows = []
-headers = []
-for symbol in symbols:
-    headers.append(symbol)
-for knowledge in kb.set:
-    headers.append(str(knowledge))
+
 bool_exp_parser = LogicParser(True)
-headers.append("A|B")
+headers.append("A->(B->(C->D))")
 headers.append("Check all")
-tt_check_all(kb.set, {bool_exp_parser.parse("A|B")}, symbols.copy(), dict(), rows)
+tt_check_all(kb.set, {bool_exp_parser.parse("A->(B->(C->D))")}, symbols.copy(), dict(), rows)
 print(tabulate(rows, headers=headers, tablefmt='orgtbl'))
