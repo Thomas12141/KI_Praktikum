@@ -80,6 +80,15 @@ for knowledge in kb.set:
     headers.append(str(knowledge))
 bool_exp_parser = LogicParser(True)
 headers.append("A|B")
-headers.append("Check all")
-tt_check_all(kb.set, {bool_exp_parser.parse("A|B")}, symbols.copy(), dict(), rows)
+headers.append("entails")
+tt_check_all(kb.set, {bool_exp_parser.parse("A | B")}, symbols.copy(), dict(), rows)
 print(tabulate(rows, headers=headers, tablefmt='orgtbl'))
+
+kb = KnowledgeBase()
+kb.tell("-A & B")
+rows = []
+print()
+print()
+tt_check_all(kb.set, {bool_exp_parser.parse("A")}, ["A", "B"], dict(), rows)
+
+print(tabulate(rows, headers=["A", "B", "-A&B", "A", "entails"], tablefmt='orgtbl'))
