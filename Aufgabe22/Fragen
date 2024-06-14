@@ -1,0 +1,3 @@
+1. 60k sample Bilder und 10k test Bilder von Kleidung.
+2. 28x28 pixel Bilder mit Grauwerten zwischen 0 und 255.
+3. 784 verschiedene Eingaben für jeden Pixel des Bildes.
