@@ -57,20 +57,3 @@ def create_kb():
             knowledge_base.tell(line)
     return knowledge_base
 
-
-headers = []
-symbols = ["A", "B", "C", "D"]
-for symbol in symbols:
-    headers.append(symbol)
-kb = create_kb()
-
-for knowledge in kb.set:
-    headers.append(str(knowledge))
-
-rows = []
-
-bool_exp_parser = LogicParser(True)
-headers.append("A->(B->(C->D))")
-headers.append("Check all")
-tt_check_all(kb.set, {bool_exp_parser.parse("A->(B->(C->D))")}, symbols.copy(), dict(), rows)
-print(tabulate(rows, headers=headers, tablefmt='orgtbl'))
